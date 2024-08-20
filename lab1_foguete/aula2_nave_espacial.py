@@ -45,16 +45,7 @@ class NaveEspacial:
     def info(self):
         print(f"{self.name} tem {self.energy} de energia e {self.shield} de escudo")
 
-# Exemplo de uso
-#nave = NaveEspacial("Falcon")
-#nave.info()
-#nave.move()
-#nave.turn("esquerda")
-#nave.shoot()
-#nave.hit(20)
-#nave.recharge()
-#nave.info()
-
+#Jogo
 nome1 = input("Digite o nome da nave do jogador 1: ")
 nome2 = input("Digite o nome da nave do jogador 2: ")
 
@@ -62,7 +53,6 @@ nave1 = NaveEspacial(nome1)
 nave2 = NaveEspacial(nome2)
 
 ver = True
-cont = 0
 while ver == True:
     print("Jogador escolha sua açao:")
     print("1 - Informaçoes")
@@ -91,7 +81,11 @@ while ver == True:
         nave1.shoot()
 
     elif menu == 5:
-        nave1.hit(20)
+        if nave1.alive == True:
+            nave1.hit(20)
+
+        if nave1.alive == False:
+            ver = False
 
     elif menu == 6:
         nave1.recharge()
