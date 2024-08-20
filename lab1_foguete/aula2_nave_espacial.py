@@ -42,10 +42,56 @@ class NaveEspacial:
         self.energy = 100
         print(f"{self.name} recarregou sua energia.")
 
+    def info(self):
+        print(f"{self.name} tem {self.energy} de energia e {self.shield} de escudo")
+
 # Exemplo de uso
-nave = NaveEspacial("Falcon")
-nave.move()
-nave.turn("esquerda")
-nave.shoot()
-nave.hit(20)
-nave.recharge()
+#nave = NaveEspacial("Falcon")
+#nave.info()
+#nave.move()
+#nave.turn("esquerda")
+#nave.shoot()
+#nave.hit(20)
+#nave.recharge()
+#nave.info()
+
+nome1 = input("Digite o nome da nave do jogador 1: ")
+nome2 = input("Digite o nome da nave do jogador 2: ")
+
+nave1 = NaveEspacial(nome1)
+nave2 = NaveEspacial(nome2)
+
+ver = True
+cont = 0
+while ver == True:
+    print("Jogador escolha sua açao:")
+    print("1 - Informaçoes")
+    print("2 - Mover")
+    print("3 - Virar")
+    print("4 - Atirar")
+    print("5 - Dano")
+    print("6 - Recarregar")
+    menu = int(input("Digite o valor desejado: "))
+    if menu == 1:
+        nave1.info()
+
+    elif menu == 2:
+        nave1.move()
+
+    elif menu == 3:
+        dire = input("Esquerda ou Direita: ")
+        if dire.lower() == "esquerda":
+            nave1.turn("esquerda")
+        elif dire.lower() == "direita":
+            nave1.turn("direita")
+        else:
+            print("Houve algum erro escolha novamente a opçao e digite a direçao novamente")
+
+    elif menu == 4:
+        nave1.shoot()
+
+    elif menu == 5:
+        nave1.hit(20)
+
+    elif menu == 6:
+        nave1.recharge()
