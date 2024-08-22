@@ -45,15 +45,7 @@ class NaveEspacial:
     def info(self):
         print(f"{self.name} tem {self.energy} de energia e {self.shield} de escudo")
 
-#Jogo
-nome1 = input("Digite o nome da nave do jogador 1: ")
-nome2 = input("Digite o nome da nave do jogador 2: ")
-
-nave1 = NaveEspacial(nome1)
-nave2 = NaveEspacial(nome2)
-
-ver = True
-while ver == True:
+def jogar(nave):
     print("Jogador escolha sua açao:")
     print("1 - Informaçoes")
     print("2 - Mover")
@@ -63,29 +55,41 @@ while ver == True:
     print("6 - Recarregar")
     menu = int(input("Digite o valor desejado: "))
     if menu == 1:
-        nave1.info()
+        nave.info()
 
     elif menu == 2:
-        nave1.move()
+        nave.move()
 
     elif menu == 3:
         dire = input("Esquerda ou Direita: ")
         if dire.lower() == "esquerda":
-            nave1.turn("esquerda")
+            nave.turn("esquerda")
         elif dire.lower() == "direita":
-            nave1.turn("direita")
+            nave.turn("direita")
         else:
             print("Houve algum erro escolha novamente a opçao e digite a direçao novamente")
 
     elif menu == 4:
-        nave1.shoot()
+        nave.shoot()
 
     elif menu == 5:
-        if nave1.alive == True:
-            nave1.hit(20)
+        if nave.alive == True:
+            nave.hit(20)
 
-        if nave1.alive == False:
+        if nave.alive == False:
             ver = False
 
     elif menu == 6:
-        nave1.recharge()
+        nave.recharge()
+
+
+#Jogo
+p1 = input("Digite o nome da nave do jogador 1: ")
+p2 = input("Digite o nome da nave do jogador 2: ")
+
+nave1 = NaveEspacial(p1)
+nave2 = NaveEspacial(p2)
+
+while nave1.alive and nave2.alive:
+    jogar(nave1)
+    jogar(nave2)
