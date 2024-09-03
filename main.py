@@ -1,3 +1,5 @@
+#Gabriel Neman Silva - 10403348
+
 import pygame
 from pygame.locals import *
 
@@ -21,8 +23,8 @@ class NaveEspacial(pygame.sprite.Sprite):
         self.speed = 5  # Velocidade da nave
         self.shield = 100
         self.energy = 100
-        self.image = pygame.Surface((50, 30))  # Tamanho da nave
-        self.image.fill((255, 255, 255))  # Cor da nave (branco)
+        self.image = pygame.image.load('nave.png')
+        self.image = pygame.transform.scale(self.image, (50, 55))
         self.rect = self.image.get_rect()
         self.rect.center = self.position
 
@@ -30,16 +32,16 @@ class NaveEspacial(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
         
         # Movimentação
-        if keys[K_LEFT]:
+        if keys[K_LEFT] or keys[K_a]:
             self.position.x -= self.speed
 
-        if keys[K_RIGHT]:
+        if keys[K_RIGHT] or keys[K_d]:
             self.position.x += self.speed
 
-        if keys[K_DOWN]:
+        if keys[K_DOWN] or keys[K_s]:
             self.position.y += self.speed
 
-        if keys[K_UP]:
+        if keys[K_UP] or keys[K_w]:
             self.position.y -= self.speed
 
         if keys[K_n]:
@@ -50,6 +52,18 @@ class NaveEspacial(pygame.sprite.Sprite):
         
         # Atualiza a posição do retângulo da nave
         self.rect.center = self.position
+
+class TiroNaveEspacial(pygame.sprite.Sprite):
+    def __inti__(self, dano):
+        super(TiroNaveEspacial, self).__init__()
+        self.dano = dano
+        self.direction = 0
+        self.speed = 10
+
+    def update(self):
+        keys = pygame.key.get_pressed()
+
+        #if keys[K_SPACE]:
 
 # Função principal do jogo
 def main():
@@ -77,3 +91,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
