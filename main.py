@@ -2,6 +2,7 @@
 
 import pygame
 from pygame.locals import *
+import random
 
 pygame.init()
 
@@ -76,10 +77,28 @@ class TiroNaveEspacial(pygame.sprite.Sprite):
         
         self.rect.center = self.position
 
+class Asteroide(pygame.sprite.Sprite):
+    def __init__(self):
+        super(Asteroide, self).__init__()
+        self.size = random.randint(30, 70)
+        self.image = pygame.image.load('asteroide.png')
+        self.image = pygame.transform.scale(self.image, (self.size, self.size))
+        self.rect = self.image.get_rect()
+        self.position = pygame.math.Vector2(random.randint(0, screen_width), -self.size)
+        self.speed = random.randint(3, 7)
+        self.rect.center = self.position
+
+    def update(self):
+        self.position.y += self.speed
+        if self.position.y > screen_height:
+            self.kill()
+        self.rect.center = self.position
+
 def main():
     nave = NaveEspacial("Nave 1")
     all_sprites = pygame.sprite.Group()
     all_sprites.add(nave)
+    asteroides = pygame.sprite.Group()
     
     clock = pygame.time.Clock()
     running = True
@@ -88,13 +107,18 @@ def main():
         for event in pygame.event.get():
             if event.type == QUIT:
                 running = False
-        
+
+        if random.randint(1, 30) == 1:
+            asteroide = Asteroide()
+            asteroides.add(asteroide)
+            all_sprites.add(asteroide)
+
         all_sprites.update()
-        
+
         screen.fill((0, 0, 0))
         all_sprites.draw(screen)
-        nave.balas.draw(screen) 
-        
+        nave.balas.draw(screen)
+
         pygame.display.flip()
         clock.tick(60)
     
